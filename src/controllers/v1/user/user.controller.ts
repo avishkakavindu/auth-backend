@@ -27,6 +27,18 @@ class UserController {
       return res.status(500).send(error);
     }
   };
+
+  public getUser = async (req: Request, res: Response) => {
+    try {
+      const { user } = res.locals;
+      const data = await this.userService.getUser(user);
+      res.status(200).json({ node: data, status: true });
+    } catch (error: any) {
+      console.log(error);
+      // ! TODO implement a handle error function
+      return res.status(500).send(error);
+    }
+  };
 }
 
 export default UserController;

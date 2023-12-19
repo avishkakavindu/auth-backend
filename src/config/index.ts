@@ -9,10 +9,7 @@ interface EnvVariables {
   SMTP_PASSWORD: string;
   SMTP_ENDPOINT: string;
   SMTP_PORT: string;
-  ACCESS_TOKEN_PUBLIC_KEY: string;
-  ACCESS_TOKEN_PRIVATE_KEY: string;
-  REFRESH_PRIVATE_KEY: string;
-  REFRESH_PUBLIC_KEY: string;
+  SECRET_KEY: string;
 }
 
 // Define the required environment variables
@@ -20,20 +17,10 @@ const requiredEnvVariables: Array<keyof EnvVariables> = [
   'NODE_ENV',
   'PORT',
   'DB_URI',
-  'ACCESS_TOKEN_PUBLIC_KEY',
-  'ACCESS_TOKEN_PRIVATE_KEY',
-  'REFRESH_PRIVATE_KEY',
-  'REFRESH_PUBLIC_KEY',
+  'SECRET_KEY',
 ];
 
-export const {
-  PORT = 3000,
-  DB_URI = '',
-  ACCESS_TOKEN_PUBLIC_KEY = '',
-  ACCESS_TOKEN_PRIVATE_KEY = '',
-  REFRESH_PRIVATE_KEY = '',
-  REFRESH_PUBLIC_KEY = '',
-} = process.env;
+export const { PORT = 3000, DB_URI = '', SECRET_KEY = '' } = process.env;
 
 process.env;
 
@@ -42,10 +29,7 @@ function loadEnvVariables(): EnvVariables {
     NODE_ENV: process.env.NODE_ENV || '',
     PORT: parseInt(process.env.PORT || '4001', 10),
     DB_URI: process.env.DB_URI || '',
-    ACCESS_TOKEN_PUBLIC_KEY: process.env.ACCESS_TOKEN_PUBLIC_KEY || '',
-    ACCESS_TOKEN_PRIVATE_KEY: process.env.ACCESS_TOKEN_PRIVATE_KEY || '',
-    REFRESH_PRIVATE_KEY: process.env.REFRESH_PRIVATE_KEY || '',
-    REFRESH_PUBLIC_KEY: process.env.REFRESH_PUBLIC_KEY || '',
+    SECRET_KEY: process.env.SECRET_KEY || '',
     SMTP_USERNAME: process.env.SMTP_USERNAME || '',
     SMTP_PASSWORD: process.env.SMTP_PASSWORD || '',
     SMTP_ENDPOINT: process.env.SMTP_ENDPOINT || '',

@@ -9,6 +9,15 @@ class UserService {
     const data = await UserModel.create(body);
     return data;
   }
+
+  /**
+   * Get user
+   * @returns
+   */
+  public async getUser(user: any) {
+    const data = await UserModel.findOne({ email: user.email });
+    return data;
+  }
 }
 
 export default UserService;

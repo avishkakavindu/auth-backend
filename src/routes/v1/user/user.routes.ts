@@ -20,6 +20,8 @@ class UserRoute implements IRoutes {
       validateResource(createUserSchema),
       this.userController.createUser
     );
+
+    this.router.get(`${this.path}/`, this.userController.getUser);
   }
 }
 

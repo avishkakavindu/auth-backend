@@ -3,7 +3,6 @@ import { User, privateFields } from '../../../db/models/user.model';
 import { omit } from 'lodash';
 import { signJwt } from '../../../utils/jwt';
 import SessionModel from '../../../db/models/session.model';
-import { ObjectId } from 'mongoose';
 
 export async function createSession({ userId }: { userId: string }) {
   return SessionModel.create({ user: userId });
@@ -22,7 +21,6 @@ export async function signRefreshToken({ userId }: { userId: string }) {
     {
       session: session._id,
     },
-    'refreshTokenPrivateKey',
     {
       expiresIn: '1y',
     }
@@ -34,7 +32,7 @@ export async function signRefreshToken({ userId }: { userId: string }) {
 export function signAccessToken(user: DocumentType<User>) {
   const payload = omit(user.toJSON(), privateFields);
 
-  const accessToken = signJwt(payload, 'accessTokenPrivateKey', {
+  const accessToken = signJwt(payload, {
     expiresIn: '15m',
   });
 
