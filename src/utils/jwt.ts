@@ -25,7 +25,7 @@ export function signJwt(
 
   return jwt.sign(object, signingKey, {
     ...(options && options),
-    algorithm: 'RS256',
+    algorithm: 'HS256', // ! FIX ME
   });
 }
 

@@ -20,10 +20,8 @@ class AuthController {
       const data = await this.authService.login(email, password);
       res.status(200).json({ node: data, status: true });
     } catch (error: any) {
-      // ! TODO implement a handle error func
-      if (error.code === 11000) {
-        return res.status(409).send('Account already exists');
-      }
+      console.log(error);
+      // ! TODO implement a handle error function
       return res.status(500).send(error);
     }
   };

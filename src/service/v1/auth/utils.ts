@@ -3,6 +3,7 @@ import { User, privateFields } from '../../../db/models/user.model';
 import { omit } from 'lodash';
 import { signJwt } from '../../../utils/jwt';
 import SessionModel from '../../../db/models/session.model';
+import { ObjectId } from 'mongoose';
 
 export async function createSession({ userId }: { userId: string }) {
   return SessionModel.create({ user: userId });

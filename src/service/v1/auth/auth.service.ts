@@ -1,6 +1,7 @@
 import { RESPONSES } from '../../../constants';
 import UserModel, { User } from '../../../db/models/user.model';
 import { HttpException } from '../../../exceptions/http';
+import { signAccessToken, signRefreshToken } from './utils';
 
 class AuthService {
   /**
@@ -9,6 +10,7 @@ class AuthService {
    */
   public async login(email: string, password: string) {
     const user = await UserModel.findOne({ email });
+
     if (!user) {
       throw new HttpException(
         409,
@@ -28,11 +30,13 @@ class AuthService {
     }
 
     // sign access token
-    const payload = user.toJSON()
+    const accessToken = signAccessToken(user);
+    // sign refresh token
+    const refreshToken = await signRefreshToken({
+      userId: user._id.toString(),
+    });
 
-    const accessToken
-
-    return user;
+    return { accessToken, refreshToken };
   }
 }
 
