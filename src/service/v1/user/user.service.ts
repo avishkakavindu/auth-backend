@@ -15,7 +15,7 @@ class UserService {
    * @returns
    */
   public async getUser(user: any) {
-    const data = await UserModel.findOne({ email: user.email });
+    const data = await UserModel.findOne({ email: user?.email });
     return data;
   }
 }
