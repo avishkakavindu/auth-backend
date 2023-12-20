@@ -22,7 +22,10 @@ const validateResource =
 
       next();
     } catch (e: any) {
-      return res.status(400).send(e.errors);
+      // TODO error handler
+      const { errors } = e;
+      const firstError = errors[0].message;
+      return res.status(400).send(firstError);
     }
   };
 

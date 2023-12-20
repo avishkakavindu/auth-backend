@@ -10,6 +10,7 @@ interface EnvVariables {
   SMTP_ENDPOINT: string;
   SMTP_PORT: string;
   SECRET_KEY: string;
+  CORS_ORIGIN: string;
 }
 
 // Define the required environment variables
@@ -18,9 +19,15 @@ const requiredEnvVariables: Array<keyof EnvVariables> = [
   'PORT',
   'DB_URI',
   'SECRET_KEY',
+  'CORS_ORIGIN',
 ];
 
-export const { PORT = 3000, DB_URI = '', SECRET_KEY = '' } = process.env;
+export const {
+  PORT = 3000,
+  DB_URI = '',
+  SECRET_KEY = '',
+  CORS_ORIGIN = '*',
+} = process.env;
 
 process.env;
 
@@ -29,6 +36,7 @@ function loadEnvVariables(): EnvVariables {
     NODE_ENV: process.env.NODE_ENV || '',
     PORT: parseInt(process.env.PORT || '4001', 10),
     DB_URI: process.env.DB_URI || '',
+    CORS_ORIGIN: process.env.CORS_ORIGIN || '*',
     SECRET_KEY: process.env.SECRET_KEY || '',
     SMTP_USERNAME: process.env.SMTP_USERNAME || '',
     SMTP_PASSWORD: process.env.SMTP_PASSWORD || '',

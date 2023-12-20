@@ -1,7 +1,8 @@
 import express, { Request } from 'express';
 import onFinished from 'on-finished';
+import cors from 'cors';
 
-import loadEnvVariables, { PORT } from './config';
+import loadEnvVariables, { CORS_ORIGIN, PORT } from './config';
 import connectToDb from './utils/db';
 import logger from './utils/logger';
 import routes from './loaders/Routes';
@@ -10,8 +11,12 @@ import deserializeUser from './middlewares/deserializeUser';
 import { handleRequestComplete, handleRequestStart } from './utils/requests';
 
 const app = express();
+
+app.use(cors({ origin: CORS_ORIGIN }));
+
 app.use(express.json());
 app.use(deserializeUser);
+
 // request logs
 app.use('/*', async (req: Request, res, next) => {
   handleRequestStart(req);
