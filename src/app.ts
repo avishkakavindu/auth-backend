@@ -10,6 +10,8 @@ import { IRoutes } from './interfaces/route.interface';
 import deserializeUser from './middlewares/deserializeUser';
 import { handleRequestComplete, handleRequestStart } from './utils/requests';
 
+// TODO organize by moving middleware initialization to separate file
+
 const app = express();
 
 app.use(cors({ origin: CORS_ORIGIN }));
