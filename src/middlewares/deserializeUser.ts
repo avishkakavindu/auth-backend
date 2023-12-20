@@ -18,6 +18,7 @@ const deserializeUser = async (
   const decoded = verifyJwt(accessToken);
 
   if (decoded) {
+    // TODO create custom Request and add user data to request instead of response
     res.locals.user = decoded;
   }
 
